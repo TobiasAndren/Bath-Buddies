@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Bounds } from "@react-three/drei";
+import { OrbitControls, useGLTF, Center } from "@react-three/drei";
 import * as THREE from "three";
 
 function DuckModel({
@@ -131,11 +131,11 @@ export default function DuckScene({
   badgeColor: string;
 }) {
   return (
-    <Canvas shadows>
+    <Canvas shadows camera={{ position: [2, 1, 2], fov: 40 }}>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 10, 7]} intensity={2} castShadow />
       <Suspense fallback={null}>
-        <Bounds fit clip observe margin={1.2}>
+        <Center>
           <DuckModel
             bodyColor={bodyColor}
             eyeColor={eyeColor}
@@ -143,9 +143,16 @@ export default function DuckScene({
             hatColor={hatColor}
             badgeColor={badgeColor}
           />
-        </Bounds>
+        </Center>
       </Suspense>
-      <OrbitControls enableDamping makeDefault />
+      <OrbitControls
+        enableDamping
+        makeDefault
+        enableZoom={false}
+        enablePan={false}
+        minPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2}
+      />
     </Canvas>
   );
 }
