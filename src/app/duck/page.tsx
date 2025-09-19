@@ -9,6 +9,7 @@ export default function Duck() {
   const [isHatVisible, setIsHatVisible] = useState(true);
   const [hatColor, setHatColor] = useState("");
   const [badgeColor, setBadgeColor] = useState("");
+  const [beakColor, setBeakColor] = useState("");
 
   return (
     <main className="w-screen h-screen flex">
@@ -19,6 +20,7 @@ export default function Duck() {
           hatVisible={isHatVisible}
           hatColor={hatColor}
           badgeColor={badgeColor}
+          beakColor={beakColor}
         />
         <button
           className="bg-orange-300 h-3 w-7"
@@ -51,6 +53,14 @@ export default function Duck() {
         <button
           className="bg-pink-500 h-3 w-7"
           onClick={() => setBadgeColor("pink")}
+        ></button>
+        <button
+          className="bg-pink-500 h-3 w-7"
+          onClick={() => setBeakColor("purple")}
+        ></button>
+        <button
+          className="bg-pink-500 h-3 w-7"
+          onClick={() => setBeakColor("red")}
         ></button>
         {isHatVisible ? (
           <button className="h-3 w-7" onClick={() => setIsHatVisible(false)}>
