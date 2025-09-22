@@ -57,11 +57,11 @@
     },
     {
       "mesh": 2,
-      "name": "normal eyes"
+      "name": "normal_eyes"
     },
     {
       "mesh": 3,
-      "name": "grinning eyes"
+      "name": "grinning_eyes"
     },
     {
       "mesh": 4,
@@ -501,7 +501,7 @@
   "buffers": [
     {
       "byteLength": 1017408,
-      "uri": "duck-final.bin"
+      "uri": "duck-model.bin"
     }
   ]
 }

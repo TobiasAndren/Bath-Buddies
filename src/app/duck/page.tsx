@@ -3,12 +3,14 @@
 import DuckScene from "@/components/DuckScene";
 import { useState } from "react";
 import { duckColorPresets } from "@/config/duckPresets";
+import { eyeExpression } from "@/components/DuckModel";
 
 export default function Duck() {
   const [preset, setPreset] = useState<"default" | "secondary">("default");
   const [isHatVisible, setIsHatVisible] = useState(true);
   const [hatColor, setHatColor] = useState("");
   const [badgeColor, setBadgeColor] = useState("");
+  const [eyeExpression, setEyeExpression] = useState<eyeExpression>("normal");
   const { bodyColor, beakColor } = duckColorPresets[preset];
 
   return (
@@ -20,6 +22,7 @@ export default function Duck() {
           hatColor={hatColor}
           badgeColor={badgeColor}
           beakColor={beakColor}
+          eyeExpression={eyeExpression}
         />
 
         <button
@@ -48,6 +51,15 @@ export default function Duck() {
             add hat
           </button>
         )}
+        <button className="h-7 w-15" onClick={() => setEyeExpression("normal")}>
+          normal
+        </button>
+        <button
+          className="h-7 w-15"
+          onClick={() => setEyeExpression("grinning")}
+        >
+          grinning
+        </button>
       </div>
     </main>
   );

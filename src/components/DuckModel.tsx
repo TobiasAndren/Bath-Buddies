@@ -2,30 +2,36 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
+export type eyeExpression = "normal" | "grinning";
+
 export default function DuckModel({
   bodyColor,
   hatVisible,
   hatColor,
   badgeColor,
   beakColor,
+  eyeExpression = "normal",
 }: {
   bodyColor: string;
   hatVisible: boolean;
   hatColor: string;
   badgeColor: string;
   beakColor: string;
+  eyeExpression: eyeExpression;
 }) {
   const { scene } = useGLTF("/duck/duck-model.gltf") as { scene: THREE.Group };
   const bodyMeshes = useRef<THREE.Mesh[]>([]);
   const hatMeshes = useRef<THREE.Mesh[]>([]);
   const badgeMeshes = useRef<THREE.Mesh[]>([]);
   const beakMeshes = useRef<THREE.Mesh[]>([]);
+  const eyeMeshes = useRef<{ normal?: THREE.Mesh; grinning?: THREE.Mesh }>({});
 
   useEffect(() => {
     const bodies: THREE.Mesh[] = [];
     const hats: THREE.Mesh[] = [];
     const badges: THREE.Mesh[] = [];
     const beaks: THREE.Mesh[] = [];
+    const eyes: { normal?: THREE.Mesh; grinning?: THREE.Mesh } = {};
 
     scene.traverse((child: THREE.Object3D) => {
       if ((child as THREE.Mesh).isMesh) {
@@ -48,6 +54,14 @@ export default function DuckModel({
             metalness: 0.2,
             roughness: 0.4,
           });
+        }
+
+        if (mesh.name === "normal_eyes") {
+          eyes.normal = mesh;
+        }
+
+        if (mesh.name === "grinning_eyes") {
+          eyes.grinning = mesh;
         }
 
         if (mesh.name.includes("eye")) {
@@ -85,6 +99,7 @@ export default function DuckModel({
     hatMeshes.current = hats;
     badgeMeshes.current = badges;
     beakMeshes.current = beaks;
+    eyeMeshes.current = eyes;
   }, [scene]);
 
   useEffect(() => {
@@ -111,6 +126,13 @@ export default function DuckModel({
       (mesh.material as THREE.MeshStandardMaterial).color.set(beakColor)
     );
   }, [beakColor]);
+
+  useEffect(() => {
+    if (!eyeMeshes.current.normal || !eyeMeshes.current.grinning) return;
+
+    eyeMeshes.current.normal.visible = eyeExpression === "normal";
+    eyeMeshes.current.grinning.visible = eyeExpression === "grinning";
+  }, [eyeExpression]);
 
   return <primitive object={scene} />;
 }
