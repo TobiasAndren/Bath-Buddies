@@ -15,7 +15,7 @@ export default function DuckModel({
   badgeColor: string;
   beakColor: string;
 }) {
-  const { scene } = useGLTF("/duck/test-duck.gltf") as any;
+  const { scene } = useGLTF("/duck/duck-model.gltf") as { scene: THREE.Group };
   const bodyMeshes = useRef<THREE.Mesh[]>([]);
   const hatMeshes = useRef<THREE.Mesh[]>([]);
   const badgeMeshes = useRef<THREE.Mesh[]>([]);
@@ -27,56 +27,58 @@ export default function DuckModel({
     const badges: THREE.Mesh[] = [];
     const beaks: THREE.Mesh[] = [];
 
-    scene.traverse((child: any) => {
-      if (child.isMesh) {
-        child.material = (child.material as THREE.Material).clone();
+    scene.traverse((child: THREE.Object3D) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        mesh.material = (mesh.material as THREE.Material).clone();
 
-        child.castShadow = true;
-        child.recieveShadow = true;
-        if (child.name.includes("body") || child.name.includes("wings")) {
-          bodies.push(child);
-          child.material = new THREE.MeshStandardMaterial({
+        if (mesh.name.includes("body") || mesh.name.includes("wings")) {
+          bodies.push(mesh);
+          mesh.material = new THREE.MeshStandardMaterial({
             color: 0xffcb2a,
             metalness: 0.3,
             roughness: 0.2,
           });
         }
-        if (child.name.includes("eye")) {
-          child.material = new THREE.MeshStandardMaterial({
+
+        if (mesh.name.includes("beak")) {
+          beaks.push(mesh);
+          mesh.material = new THREE.MeshStandardMaterial({
+            color: 0xff8019,
+            metalness: 0.2,
+            roughness: 0.4,
+          });
+        }
+
+        if (mesh.name.includes("eye")) {
+          mesh.material = new THREE.MeshStandardMaterial({
             color: 0x000000,
             metalness: 0.3,
             roughness: 0.2,
           });
         }
-        if (child.name.includes("hat_flower_1")) {
-          hats.push(child);
-          child.material = new THREE.MeshStandardMaterial({
+
+        if (mesh.name.includes("hat")) {
+          hats.push(mesh);
+          mesh.material = new THREE.MeshStandardMaterial({
             color: 0xe572e3,
             metalness: 0.2,
             roughness: 0.7,
           });
         }
-        if (child.name.includes("hat_badge")) {
-          badges.push(child);
-          child.material = new THREE.MeshStandardMaterial({
+
+        if (mesh.name.includes("rim")) {
+          badges.push(mesh);
+          mesh.material = new THREE.MeshStandardMaterial({
             color: 0x70c6ff,
             metalness: 0.2,
             roughness: 0.7,
           });
         }
       }
-      if (child.name.includes("beak")) {
-        child.traverse((subChild: any) => {
-          if (subChild.isMesh) {
-            beaks.push(subChild);
-            subChild.material = new THREE.MeshStandardMaterial({
-              color: 0xff8019,
-              metalness: 0.2,
-              roughness: 0.4,
-            });
-          }
-        });
-      }
+
+      child.castShadow = true;
+      child.receiveShadow = true;
     });
 
     bodyMeshes.current = bodies;

@@ -19,7 +19,7 @@ export default function DuckScene({
   beakColor: string;
 }) {
   return (
-    <Canvas shadows camera={{ position: [2, 1, 2], fov: 40 }}>
+    <Canvas shadows camera={{ position: [2, 1, 2], fov: 20 }}>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 10, 7]} intensity={2} castShadow />
       <Suspense fallback={null}>
