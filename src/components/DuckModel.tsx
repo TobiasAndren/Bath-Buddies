@@ -3,6 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
 export type eyeExpression = "normal" | "grinning";
+export type colorOptions = "default" | "secondary";
 
 export default function DuckModel({
   bodyColor,

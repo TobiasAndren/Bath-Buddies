@@ -3,10 +3,10 @@
 import DuckScene from "@/components/DuckScene";
 import { useState } from "react";
 import { duckColorPresets } from "@/config/duckPresets";
-import { eyeExpression } from "@/components/DuckModel";
+import { eyeExpression, colorOptions } from "@/components/DuckModel";
 
 export default function Duck() {
-  const [preset, setPreset] = useState<"default" | "secondary">("default");
+  const [preset, setPreset] = useState<colorOptions>("default");
   const [isHatVisible, setIsHatVisible] = useState(true);
   const [hatColor, setHatColor] = useState("");
   const [badgeColor, setBadgeColor] = useState("");
