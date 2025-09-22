@@ -2,50 +2,38 @@
 
 import DuckScene from "@/components/DuckScene";
 import { useState } from "react";
+import { duckColorPresets } from "@/config/duckPresets";
+import { eyeExpression } from "@/components/DuckModel";
 
 export default function Duck() {
-  const [bodyColor, setBodyColor] = useState("");
-  const [eyeColor, setEyeColor] = useState("");
+  const [preset, setPreset] = useState<"default" | "secondary">("default");
   const [isHatVisible, setIsHatVisible] = useState(true);
   const [hatColor, setHatColor] = useState("");
   const [badgeColor, setBadgeColor] = useState("");
-  const [beakColor, setBeakColor] = useState("");
+  const [eyeExpression, setEyeExpression] = useState<eyeExpression>("normal");
+  const { bodyColor, beakColor } = duckColorPresets[preset];
 
   return (
     <main className="w-screen h-screen flex">
       <div className="h-1/2 w-1/3">
         <DuckScene
           bodyColor={bodyColor}
-          eyeColor={eyeColor}
           hatVisible={isHatVisible}
           hatColor={hatColor}
           badgeColor={badgeColor}
           beakColor={beakColor}
+          eyeExpression={eyeExpression}
         />
+
         <button
-          className="bg-orange-300 h-3 w-7"
-          onClick={() => setBodyColor("#ffca4b")}
+          className="bg-orange-500 h-3 w-7"
+          onClick={() => setPreset("default")}
         ></button>
         <button
-          className="bg-red-500 h-3 w-7"
-          onClick={() => setBodyColor("red")}
+          className="bg-pink-500 h-3 w-7"
+          onClick={() => setPreset("secondary")}
         ></button>
-        <button
-          className="bg-green-500 h-3 w-7"
-          onClick={() => setBodyColor("green")}
-        ></button>
-        <button
-          className="bg-black h-3 w-7"
-          onClick={() => setEyeColor("black")}
-        ></button>
-        <button
-          className="bg-blue-500 h-3 w-7"
-          onClick={() => setEyeColor("blue")}
-        ></button>
-        <button
-          className="bg-purple-500 h-3 w-7"
-          onClick={() => setEyeColor("purple")}
-        ></button>
+
         <button
           className="bg-red-500 h-3 w-7"
           onClick={() => setHatColor("red")}
@@ -53,14 +41,6 @@ export default function Duck() {
         <button
           className="bg-pink-500 h-3 w-7"
           onClick={() => setBadgeColor("pink")}
-        ></button>
-        <button
-          className="bg-pink-500 h-3 w-7"
-          onClick={() => setBeakColor("purple")}
-        ></button>
-        <button
-          className="bg-pink-500 h-3 w-7"
-          onClick={() => setBeakColor("red")}
         ></button>
         {isHatVisible ? (
           <button className="h-3 w-7" onClick={() => setIsHatVisible(false)}>
@@ -71,6 +51,15 @@ export default function Duck() {
             add hat
           </button>
         )}
+        <button className="h-7 w-15" onClick={() => setEyeExpression("normal")}>
+          normal
+        </button>
+        <button
+          className="h-7 w-15"
+          onClick={() => setEyeExpression("grinning")}
+        >
+          grinning
+        </button>
       </div>
     </main>
   );
