@@ -7,14 +7,12 @@ import DuckModel from "./DuckModel";
 
 export default function DuckScene({
   bodyColor,
-  eyeColor,
   hatVisible,
   hatColor,
   badgeColor,
   beakColor,
 }: {
   bodyColor: string;
-  eyeColor: string;
   hatVisible: boolean;
   hatColor: string;
   badgeColor: string;
@@ -28,7 +26,6 @@ export default function DuckScene({
         <Center>
           <DuckModel
             bodyColor={bodyColor}
-            eyeColor={eyeColor}
             hatVisible={hatVisible}
             hatColor={hatColor}
             badgeColor={badgeColor}

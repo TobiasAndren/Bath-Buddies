@@ -4,14 +4,12 @@ import * as THREE from "three";
 
 export default function DuckModel({
   bodyColor,
-  eyeColor,
   hatVisible,
   hatColor,
   badgeColor,
   beakColor,
 }: {
   bodyColor: string;
-  eyeColor: string;
   hatVisible: boolean;
   hatColor: string;
   badgeColor: string;
@@ -19,14 +17,12 @@ export default function DuckModel({
 }) {
   const { scene } = useGLTF("/duck/test-duck.gltf") as any;
   const bodyMeshes = useRef<THREE.Mesh[]>([]);
-  const eyeMeshes = useRef<THREE.Mesh[]>([]);
   const hatMeshes = useRef<THREE.Mesh[]>([]);
   const badgeMeshes = useRef<THREE.Mesh[]>([]);
   const beakMeshes = useRef<THREE.Mesh[]>([]);
 
   useEffect(() => {
     const bodies: THREE.Mesh[] = [];
-    const eyes: THREE.Mesh[] = [];
     const hats: THREE.Mesh[] = [];
     const badges: THREE.Mesh[] = [];
     const beaks: THREE.Mesh[] = [];
@@ -46,7 +42,6 @@ export default function DuckModel({
           });
         }
         if (child.name.includes("eye")) {
-          eyes.push(child);
           child.material = new THREE.MeshStandardMaterial({
             color: 0x000000,
             metalness: 0.3,
@@ -70,7 +65,6 @@ export default function DuckModel({
           });
         }
       }
-
       if (child.name.includes("beak")) {
         child.traverse((subChild: any) => {
           if (subChild.isMesh) {
@@ -86,7 +80,6 @@ export default function DuckModel({
     });
 
     bodyMeshes.current = bodies;
-    eyeMeshes.current = eyes;
     hatMeshes.current = hats;
     badgeMeshes.current = badges;
     beakMeshes.current = beaks;
@@ -97,12 +90,6 @@ export default function DuckModel({
       (mesh.material as THREE.MeshStandardMaterial).color.set(bodyColor)
     );
   }, [bodyColor]);
-
-  useEffect(() => {
-    eyeMeshes.current.forEach((mesh) =>
-      (mesh.material as THREE.MeshStandardMaterial).color.set(eyeColor)
-    );
-  }, [eyeColor]);
 
   useEffect(() => {
     hatMeshes.current.forEach((mesh) => {
