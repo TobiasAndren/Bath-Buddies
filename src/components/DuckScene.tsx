@@ -1,74 +1,50 @@
 "use client";
 
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Bounds } from "@react-three/drei";
-import * as THREE from "three";
+import { OrbitControls, Center } from "@react-three/drei";
+import DuckModel from "./DuckModel";
+import { eyeExpression } from "./DuckModel";
 
-function DuckModel() {
-  const { scene } = useGLTF("/duck/test-duck.gltf") as any;
-
-  useEffect(() => {
-    scene.traverse((child: any) => {
-      if (child.isMesh) {
-        if (child.name.includes("body") || child.name.includes("wings")) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0xffca4b,
-            metalness: 0.4,
-            roughness: 0.2,
-          });
-        }
-        if (child.name.includes("eye")) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0x000000,
-            metalness: 0.4,
-            roughness: 0.2,
-          });
-        }
-        if (child.name.includes("hat_flower_1")) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0xa968c4,
-            metalness: 0.2,
-            roughness: 0.5,
-          });
-        }
-        if (child.name.includes("hat_badge")) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0x5b1657,
-            metalness: 0.2,
-            roughness: 0.5,
-          });
-        }
-      }
-
-      if (child.name.includes("beak")) {
-        child.traverse((subChild: any) => {
-          if (subChild.isMesh) {
-            subChild.material = new THREE.MeshStandardMaterial({
-              color: 0xf35626,
-              metalness: 0.4,
-              roughness: 0.2,
-            });
-          }
-        });
-      }
-    });
-  }, [scene]);
-
-  return <primitive object={scene} />;
-}
-
-export default function DuckScene() {
+export default function DuckScene({
+  bodyColor,
+  hatVisible,
+  hatColor,
+  badgeColor,
+  beakColor,
+  eyeExpression,
+}: {
+  bodyColor: string;
+  hatVisible: boolean;
+  hatColor: string;
+  badgeColor: string;
+  beakColor: string;
+  eyeExpression: eyeExpression;
+}) {
   return (
-    <Canvas camera={{ fov: 75 }}>
-      <ambientLight intensity={1.5} />
-      <directionalLight position={[5, 10, 7]} intensity={1.5} />
+    <Canvas shadows camera={{ position: [2, 1, 2], fov: 20 }}>
+      <ambientLight intensity={1} />
+      <directionalLight position={[5, 10, 7]} intensity={2} castShadow />
       <Suspense fallback={null}>
-        <Bounds fit clip observe margin={1.2}>
-          <DuckModel />
-        </Bounds>
+        <Center>
+          <DuckModel
+            bodyColor={bodyColor}
+            hatVisible={hatVisible}
+            hatColor={hatColor}
+            badgeColor={badgeColor}
+            beakColor={beakColor}
+            eyeExpression={eyeExpression}
+          />
+        </Center>
       </Suspense>
-      <OrbitControls enableDamping makeDefault />
+      <OrbitControls
+        enableDamping
+        makeDefault
+        enableZoom={false}
+        enablePan={false}
+        minPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2}
+      />
     </Canvas>
   );
 }
