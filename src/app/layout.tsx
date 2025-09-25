@@ -30,7 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        {children}
+        <main className="bg-[url('/images/background.svg')] bg-cover bg-center bg-no-repeat">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

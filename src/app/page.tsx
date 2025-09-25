@@ -5,9 +5,9 @@ import Gallery from "@/components/layout/Gallery";
 export default function Home() {
   return (
     <>
-      <Hero />
-      <ProductDescription />
-      <Gallery />
+      <Hero className="mt-11 mb-11" />
+      <ProductDescription className="mb-11" />
+      <Gallery className="mb-11" />
     </>
   );
 }

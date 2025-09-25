@@ -2,7 +2,6 @@
 
 import DuckScene from "@/components/DuckScene";
 import { useState } from "react";
-import { duckColorPresets } from "@/config/duckPresets";
 import { eyeExpression, colorOptions } from "@/components/DuckModel";
 
 export default function Duck() {
@@ -11,8 +10,8 @@ export default function Duck() {
   const [hatColor, setHatColor] = useState("");
   const [badgeColor, setBadgeColor] = useState("");
   const [eyeExpression, setEyeExpression] = useState<eyeExpression>("normal");
-  const { bodyColor, beakColor } = duckColorPresets[preset];
-
+  const [bodyColor, setBodyColor] = useState("#FFCB2A");
+  const [beakColor, setBeakColor] = useState("#FF8019");
   return (
     <main className="w-screen h-screen flex">
       <div className="h-1/2 w-1/3">
