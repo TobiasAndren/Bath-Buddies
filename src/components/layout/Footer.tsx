@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="w-full px-28 py-14 bg-neutral-200 flex justify-center items-center gap-2.5 overflow-hidden">
+    <div className="w-full px-28 py-14 bg-blue-50 flex justify-center items-center gap-2.5 overflow-hidden">
       <div className="w-44 flex justify-center items-center gap-2.5">
         <div className="flex-1 inline-flex flex-col justify-center items-start gap-5">
           <div className="justify-start text-black text-xl font-normal font-['Inter']">

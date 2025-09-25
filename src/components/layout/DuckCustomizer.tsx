@@ -61,7 +61,7 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
   };
 
   return (
-    <div className="self-stretch self-stretch inline-flex flex-col justify-start items-start gap-5">
+    <div className="w-full h-full flex flex-col justify-start items-start gap-5">
       <div className="pl-10 pt-5 pb-2.5 flex flex-col justify-start items-start gap-5">
         <div className="justify-start text-Text-Black text-4xl font-normal font-['Gloock']">
           Customize your duck
@@ -69,15 +69,15 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
         <div className="flex flex-col justify-start items-start gap-7">
           {/* Color on duck */}
           <div className="flex flex-col justify-start items-start gap-3.5">
-            <div className="rounded-[5px] outline outline-2 outline-offset-[-2px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-              <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
-                Color on duck:
-              </div>
+            <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
+              Color on duck:
             </div>
             <div className="inline-flex justify-start items-start gap-5">
               <button
-                className={`p-2.5 rounded-[10px] outline outline-1 outline-offset-[-1px] ${
-                  preset === "default" ? "outline-zinc-400" : "outline-zinc-400"
+                className={`p-2.5 rounded-[10px] ${
+                  preset === "default"
+                    ? "outline outline-1 outline-offset-[-1px] outline-zinc-400"
+                    : ""
                 } flex justify-start items-center gap-2.5`}
                 onClick={() => handlePresetChange("default")}
               >
@@ -90,7 +90,9 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
               </button>
               <button
                 className={`p-2.5 rounded-[10px] ${
-                  preset === "secondary" ? "bg-white" : "bg-white"
+                  preset === "secondary"
+                    ? "outline outline-1 outline-offset-[-1px] outline-zinc-400"
+                    : ""
                 } inline-flex flex-col justify-start items-center gap-2.5`}
                 onClick={() => handlePresetChange("secondary")}
               >
@@ -104,17 +106,15 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
 
           {/* Eyes */}
           <div className="flex flex-col justify-start items-start gap-3.5">
-            <div className="rounded-[5px] outline outline-2 outline-offset-[-2px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-              <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
-                Eyes:
-              </div>
+            <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
+              Eyes:
             </div>
             <div className="inline-flex justify-start items-start gap-5">
               <button
-                className={`p-2.5 rounded-[10px] outline outline-1 outline-offset-[-1px] ${
+                className={`p-2.5 rounded-[10px] ${
                   eyeExpression === "grinning"
-                    ? "outline-zinc-400"
-                    : "outline-zinc-400"
+                    ? "outline outline-1 outline-offset-[-1px] outline-zinc-400"
+                    : ""
                 } flex justify-start items-center gap-2.5`}
                 onClick={() => handleEyeChange("grinning")}
               >
@@ -130,10 +130,10 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
                 </div>
               </button>
               <button
-                className={`p-2.5 rounded-[10px] outline outline-2 outline-offset-[-2px] ${
+                className={`p-2.5 rounded-[10px] ${
                   eyeExpression === "normal"
-                    ? "outline-zinc-400"
-                    : "outline-zinc-400"
+                    ? "outline outline-1 outline-offset-[-1px] outline-zinc-400"
+                    : ""
                 } flex justify-start items-center gap-2.5`}
                 onClick={() => handleEyeChange("normal")}
               >
@@ -153,15 +153,15 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
 
           {/* Accessories */}
           <div className="flex flex-col justify-start items-start gap-3.5">
-            <div className="rounded-[5px] outline outline-2 outline-offset-[-2px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-              <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
-                Accessories:
-              </div>
+            <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
+              Accessories:
             </div>
             <div className="inline-flex justify-start items-start gap-5">
               <button
-                className={`p-2.5 rounded-[10px] outline outline-1 outline-offset-[-1px] ${
-                  isHatVisible ? "outline-zinc-400" : "outline-zinc-400"
+                className={`p-2.5 rounded-[10px] ${
+                  isHatVisible
+                    ? "outline outline-1 outline-offset-[-1px] outline-zinc-400"
+                    : ""
                 } flex justify-start items-center gap-2.5`}
                 onClick={() => handleHatToggle(true)}
               >
@@ -177,8 +177,10 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
                 </div>
               </button>
               <button
-                className={`p-2.5 rounded-[10px] outline outline-1 outline-offset-[-1px] ${
-                  !isHatVisible ? "outline-zinc-400" : "outline-zinc-400"
+                className={`p-2.5 rounded-[10px] ${
+                  !isHatVisible
+                    ? "outline outline-1 outline-offset-[-1px] outline-zinc-400"
+                    : ""
                 } flex justify-start items-center gap-2.5`}
                 onClick={() => handleHatToggle(false)}
               >
@@ -198,17 +200,13 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
 
           {/* Color on Hat */}
           <div className="flex flex-col justify-start items-start gap-3.5">
-            <div className="rounded-[5px] outline outline-2 outline-offset-[-2px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-              <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
-                Color on Hat:
-              </div>
+            <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
+              Color on Hat:
             </div>
             <div className="inline-flex justify-start items-start gap-3.5">
               <div className="inline-flex flex-col justify-start items-start gap-2">
-                <div className="rounded-[5px] outline outline-2 outline-offset-[-2px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-                  <div className="justify-start text-Text-Black text-lg font-normal font-['Gloock']">
-                    Hat rim:
-                  </div>
+                <div className="justify-start text-Text-Black text-lg font-normal font-['Gloock']">
+                  Hat rim:
                 </div>
                 <div className="inline-flex justify-start items-start gap-5">
                   <div className="p-2.5 bg-white rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-400 flex justify-start items-center gap-2.5">
@@ -228,10 +226,8 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
                 </div>
               </div>
               <div className="inline-flex flex-col justify-start items-start gap-2">
-                <div className="rounded-[5px] outline outline-2 outline-offset-[-2px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-                  <div className="justify-start text-Text-Black text-lg font-normal font-['Gloock']">
-                    Hat Base:
-                  </div>
+                <div className="justify-start text-Text-Black text-lg font-normal font-['Gloock']">
+                  Hat Base:
                 </div>
                 <div className="inline-flex justify-start items-start gap-5">
                   <div className="p-2.5 bg-white rounded-[10px] outline outline-1 outline-offset-[-1px] outline-zinc-400 flex justify-start items-center gap-2.5">
@@ -259,8 +255,8 @@ export default function DuckCustomizer({ onDuckChange }: DuckCustomizerProps) {
           <div className="justify-start text-Text-Black text-xl font-normal font-['Gloock']">
             199,00 Kr
           </div>
-          <div className="px-14 py-5 bg-Text-Black rounded-md shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] inline-flex justify-center items-center gap-2.5">
-            <div className="justify-start text-Text-White text-base font-bold font-['Nunito']">
+          <div className="px-14 py-5 bg-sky-400 rounded-md shadow-[0px_4px_4px_0px_rgba(136,123,213,0.25)] inline-flex justify-center items-center gap-2.5">
+            <div className="justify-start text-white text-2xl font-bold font-['Nunito']">
               Add to cart
             </div>
           </div>
