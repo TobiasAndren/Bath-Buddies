@@ -6,10 +6,23 @@
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Custom colors */
+  --color-duck-yellow: #ffcb2a;
+  --color-duck-pink: #ff89cb;
+  --color-beak-orange: #ff8019;
+  --color-beak-red: #ff383f;
+  --color-hat-rim-ocean: #70c6ff;
+  --color-hat-rim-navy: #004b8d;
+  --color-hat-base-pink: #e572e3;
+  --color-hat-base-aqua: #1dbee1;
+  --color-brand-blue: #0085ff;
+  --color-text-white: #ffffff;
+  --color-text-black: #000000;
+  --color-text-grey: #8e8e8e;
+
+  /* Fonts */
+  --font-gloock: "Gloock", serif;
+  --font-nunito: "Nunito", system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +35,4 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
