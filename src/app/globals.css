@@ -24,15 +24,3 @@
   --font-gloock: "Gloock", serif;
   --font-nunito: "Nunito", system-ui, sans-serif;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ededed;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-}
